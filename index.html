@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester // regex-tester.slippylabs.com</title>
+<meta name="description" content="Test a regular expression against sample text with live match highlighting. Runs entirely in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2234%22%20r%3D%2222%22%20fill%3D%22%231c8a52%22%20stroke%3D%22%2339ff8f%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2216%22%20r%3D%228%22%20fill%3D%22%231c8a52%22%20stroke%3D%22%2339ff8f%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2216%22%20r%3D%228%22%20fill%3D%22%231c8a52%22%20stroke%3D%22%2339ff8f%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E">
+<meta name="theme-color" content="#050b10">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="scanlines"></div>
+
+<main class="page-wrap">
+  <div class="hud-panel wide">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="callsign-row">
+      <div class="toad-avatar-wrap">
+        <svg class="toad-avatar" width="46" height="46" viewBox="0 0 64 64">
+          <circle cx="32" cy="34" r="22" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="20" cy="16" r="8" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="44" cy="16" r="8" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="20" cy="16" r="3.5" fill="#050b10"/>
+          <circle cx="44" cy="16" r="3.5" fill="#050b10"/>
+          <ellipse cx="24" cy="32" rx="4.5" ry="5.5" fill="#050b10"/>
+          <ellipse cx="40" cy="32" rx="4.5" ry="5.5" fill="#050b10"/>
+          <circle cx="24" cy="30" r="1.4" fill="#39ff8f"/>
+          <circle cx="40" cy="30" r="1.4" fill="#39ff8f"/>
+          <path d="M22 42 Q32 48 42 42" stroke="#050b10" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="lock-reticle"></div>
+      </div>
+      <span class="callsign">Workshop Division // Tool</span>
+      <div class="nav-links">
+        <a href="https://projects.slippylabs.com/" class="logout-link">← Archive</a>
+      </div>
+    </div>
+
+    <h1>REGEX TESTER</h1>
+    <p class="subtitle">Enter a pattern and flags, then paste text to test against. Matches highlight live, capture groups list below.</p>
+
+    <div class="tool-field-row">
+      <label class="tool-field-label" for="regex-pattern">Pattern</label>
+      <input type="text" class="tool-text-input" id="regex-pattern" spellcheck="false" placeholder="\b[A-Z][a-z]+\b" value="\b[A-Z][a-z]+\b">
+    </div>
+
+    <div class="tool-field-row">
+      <label class="tool-field-label" for="regex-flags">Flags</label>
+      <input type="text" class="tool-text-input" id="regex-flags" spellcheck="false" placeholder="gi" value="g" style="max-width: 140px;">
+    </div>
+
+    <div class="tool-field-row">
+      <label class="tool-field-label" for="test-string">Test String</label>
+      <textarea class="tool-textarea" id="test-string" spellcheck="false">Falco Lombardi and Fox McCloud flew the Great Fox past Corneria.</textarea>
+    </div>
+
+    <div class="tool-field-row">
+      <label class="tool-field-label">Highlighted Result</label>
+      <div class="tool-output" id="highlight-output"></div>
+    </div>
+
+    <div class="tool-field-row">
+      <label class="tool-field-label">Matches (<span id="match-count">0</span>)</label>
+      <ul class="match-list" id="match-list"></ul>
+    </div>
+
+    <div class="comm-window">
+      <div class="comm-portrait">
+        <svg width="36" height="36" viewBox="0 0 64 64">
+          <circle cx="32" cy="34" r="22" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="20" cy="16" r="8" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="44" cy="16" r="8" fill="#1c8a52" stroke="#39ff8f" stroke-width="2"/>
+          <circle cx="20" cy="16" r="3.5" fill="#050b10"/>
+          <circle cx="44" cy="16" r="3.5" fill="#050b10"/>
+          <ellipse cx="24" cy="32" rx="4.5" ry="5.5" fill="#050b10"/>
+          <ellipse cx="40" cy="32" rx="4.5" ry="5.5" fill="#050b10"/>
+          <circle cx="24" cy="30" r="1.4" fill="#39ff8f"/>
+          <circle cx="40" cy="30" r="1.4" fill="#39ff8f"/>
+          <path d="M22 42 Q32 48 42 42" stroke="#050b10" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="comm-body">
+        <div class="comm-label"><span class="dot"></span> Incoming Transmission &mdash; Slippy</div>
+        <p>"Uses your browser's own regex engine — same one your JS console runs on."</p>
+      </div>
+    </div>
+
+    <a href="https://projects.slippylabs.com/" class="hud-btn">← Back to Archive</a>
+  </div>
+</main>
+
+<script>
+const patternInput = document.getElementById('regex-pattern');
+const flagsInput = document.getElementById('regex-flags');
+const testInput = document.getElementById('test-string');
+const highlightOutput = document.getElementById('highlight-output');
+const matchList = document.getElementById('match-list');
+const matchCount = document.getElementById('match-count');
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function update() {
+  const pattern = patternInput.value;
+  const flags = flagsInput.value.replace(/[^gimsuy]/g, '');
+  const text = testInput.value;
+
+  if (!pattern) {
+    highlightOutput.innerHTML = escapeHtml(text);
+    highlightOutput.classList.remove('error-text');
+    matchList.innerHTML = '';
+    matchCount.textContent = '0';
+    return;
+  }
+
+  let re;
+  try {
+    re = new RegExp(pattern, flags.includes('g') ? flags : flags + 'g');
+    highlightOutput.classList.remove('error-text');
+  } catch (err) {
+    highlightOutput.classList.add('error-text');
+    highlightOutput.textContent = 'Invalid pattern: ' + err.message;
+    matchList.innerHTML = '';
+    matchCount.textContent = '0';
+    return;
+  }
+
+  let lastIndex = 0;
+  let piece = '';
+  const matches = [];
+  let match;
+  let guard = 0;
+
+  while ((match = re.exec(text)) !== null && guard < 5000) {
+    guard++;
+    piece += escapeHtml(text.slice(lastIndex, match.index));
+    piece += `<mark class="regex-match">${escapeHtml(match[0])}</mark>`;
+    lastIndex = match.index + match[0].length;
+    matches.push(match);
+    if (match[0] === '') re.lastIndex++;
+  }
+  piece += escapeHtml(text.slice(lastIndex));
+
+  highlightOutput.innerHTML = piece || '<span style="color: var(--text-dim);">(empty test string)</span>';
+  matchCount.textContent = matches.length;
+
+  if (!matches.length) {
+    matchList.innerHTML = '<li style="color: var(--text-dim);">No matches.</li>';
+  } else {
+    matchList.innerHTML = matches.map((m, i) => {
+      const groups = m.length > 1 ? ' — groups: ' + m.slice(1).map(g => `"${g ?? ''}"`).join(', ') : '';
+      return `<li><span class="match-index">#${i + 1}</span>"${escapeHtml(m[0])}"${escapeHtml(groups)} <span style="color: var(--text-dim);">(at ${m.index})</span></li>`;
+    }).join('');
+  }
+}
+
+[patternInput, flagsInput, testInput].forEach(el => el.addEventListener('input', update));
+update();
+</script>
+</body>
+</html>
